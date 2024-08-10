@@ -20,7 +20,7 @@ const API_KEY = 'your-fixed-api-key'; // Replace with your actual fixed API key
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
@@ -28,6 +28,11 @@ export class AppController {
     if (apiKey !== API_KEY) {
       throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
+
+    if (!file) {
+      throw new HttpException('No file uploaded', HttpStatus.BAD_REQUEST);
+    }
+
     return {
       message: 'File uploaded successfully',
       filename: file.filename,

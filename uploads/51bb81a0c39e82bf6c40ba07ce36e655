@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Update package lists
+sudo dnf update -y
+
+# Install development tools
+sudo dnf groupinstall -y "Development Tools"
+
+# Install Python3 and development headers
+sudo dnf install -y python3 python3-devel
+
+# Install Node.js and npm
+curl -sL https://rpm.nodesource.com/setup_lts.x | sudo -E bash -
+sudo dnf install -y nodejs
+
+# Install additional developer utilities
+sudo dnf install -y git gcc gcc-c++ make cmake
+
+# Install code editor (e.g., Visual Studio Code)
+# You can choose a different editor if you prefer.
+sudo dnf install -y code
+
+# Set Python3 as the default Python version (optional)
+# Uncomment the following line if you want Python3 as default
+# sudo alternatives --config python3
+
+echo "Development tools installed successfully!"
